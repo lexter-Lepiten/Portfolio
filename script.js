@@ -35,22 +35,27 @@ const navSections = ['work', 'profile', 'skills', 'contact']
   .map(id => document.getElementById(id))
   .filter(Boolean);
 
-if ('IntersectionObserver' in window && navSections.length) {
-  const navObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(link => {
-            link.classList.toggle('is-active', link.dataset.nav === entry.target.id);
-          });
-        }
-      });
-    },
-    { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
-  );
+function updateActiveNav() {
+  if (!navSections.length) return;
 
-  navSections.forEach(section => navObserver.observe(section));
+  const headerOffset = 120; // account for sticky header height
+  const scrollPos = window.scrollY + headerOffset;
+
+  let currentId = null;
+  navSections.forEach(section => {
+    if (section.offsetTop <= scrollPos) {
+      currentId = section.id;
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.toggle('is-active', link.dataset.nav === currentId);
+  });
 }
+
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+window.addEventListener('load', updateActiveNav);
+updateActiveNav();
 
 // Lightbox
 const lightbox = document.getElementById('lightbox');
