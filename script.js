@@ -14,8 +14,12 @@ filterButtons.forEach(btn => {
   btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
 });
 
-// Scroll progress bar
+// Scroll progress bar + active nav highlighting (rAF-throttled)
 const scrollProgress = document.getElementById('scrollProgress');
+const navLinks = document.querySelectorAll('#primaryNav a[data-nav]');
+const navSections = ['work', 'profile', 'skills', 'contact']
+  .map(id => document.getElementById(id))
+  .filter(Boolean);
 
 function updateScrollProgress() {
   if (!scrollProgress) return;
@@ -25,15 +29,6 @@ function updateScrollProgress() {
   const pct = height > 0 ? (scrollTop / height) * 100 : 0;
   scrollProgress.style.width = pct + '%';
 }
-
-window.addEventListener('scroll', updateScrollProgress, { passive: true });
-updateScrollProgress();
-
-// Active nav-link highlighting
-const navLinks = document.querySelectorAll('#primaryNav a[data-nav]');
-const navSections = ['work', 'profile', 'skills', 'contact']
-  .map(id => document.getElementById(id))
-  .filter(Boolean);
 
 function updateActiveNav() {
   if (!navSections.length) return;
@@ -53,8 +48,23 @@ function updateActiveNav() {
   });
 }
 
-window.addEventListener('scroll', updateActiveNav, { passive: true });
-window.addEventListener('load', updateActiveNav);
+let scrollTicking = false;
+function onScroll() {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(() => {
+    updateScrollProgress();
+    updateActiveNav();
+    scrollTicking = false;
+  });
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('load', () => {
+  updateScrollProgress();
+  updateActiveNav();
+});
+updateScrollProgress();
 updateActiveNav();
 
 // Lightbox
@@ -64,26 +74,72 @@ const lightboxCaption = document.getElementById('lightboxCaption');
 const lightboxClose = document.getElementById('lightboxClose');
 let lastFocused = null;
 
-function openLightbox(trigger) {
-  lastFocused = trigger;
+// Ordered list of triggers currently visible, for prev/next + preload
+const allTriggers = Array.from(document.querySelectorAll('.sample-trigger'));
+let currentIndex = -1;
+
+function getVisibleTriggers() {
+  return allTriggers.filter(t => !t.closest('.sample-item').classList.contains('is-hidden'));
+}
+
+function preloadImage(src) {
+  if (!src) return;
+  const img = new Image();
+  img.src = src;
+}
+
+function preloadNeighbors(list, index) {
+  const next = list[index + 1];
+  const prev = list[index - 1];
+  if (next) preloadImage(next.dataset.full);
+  if (prev) preloadImage(prev.dataset.full);
+}
+
+function showAtIndex(list, index) {
+  const trigger = list[index];
+  if (!trigger) return;
+  currentIndex = index;
   lightboxImg.src = trigger.dataset.full;
   lightboxImg.alt = trigger.querySelector('img').alt;
   lightboxCaption.textContent = trigger.dataset.caption || '';
+  preloadNeighbors(list, index);
+}
+
+function openLightbox(trigger) {
+  lastFocused = trigger;
+  const list = getVisibleTriggers();
+  const index = list.indexOf(trigger);
+  showAtIndex(list, index === -1 ? 0 : index);
+
   lightbox.classList.add('is-open');
   lightbox.setAttribute('aria-hidden', 'false');
   lightboxClose.focus();
-  document.body.style.overflow = 'hidden';
+  document.body.classList.add('lightbox-open');
 }
 
 function closeLightbox() {
   lightbox.classList.remove('is-open');
   lightbox.setAttribute('aria-hidden', 'true');
   lightboxImg.src = '';
-  document.body.style.overflow = '';
+  document.body.classList.remove('lightbox-open');
   if (lastFocused) lastFocused.focus();
 }
 
-document.querySelectorAll('.sample-trigger').forEach(trigger => {
+function showNext() {
+  const list = getVisibleTriggers();
+  if (!list.length) return;
+  const next = (currentIndex + 1) % list.length;
+  showAtIndex(list, next);
+}
+
+function showPrev() {
+  const list = getVisibleTriggers();
+  if (!list.length) return;
+  const prev = (currentIndex - 1 + list.length) % list.length;
+  showAtIndex(list, prev);
+}
+
+allTriggers.forEach(trigger => {
   trigger.addEventListener('click', () => openLightbox(trigger));
 });
 
@@ -92,7 +148,10 @@ lightbox.addEventListener('click', e => {
   if (e.target === lightbox) closeLightbox();
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  if (!lightbox.classList.contains('is-open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') showNext();
+  if (e.key === 'ArrowLeft') showPrev();
 });
 
 const revealItems = document.querySelectorAll('.reveal');

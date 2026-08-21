@@ -29,6 +29,10 @@ body {
   line-height: 1.5;
 }
 
+body.lightbox-open {
+  overflow: hidden;
+}
+
 .grain {
   position: fixed;
   inset: 0;
@@ -584,13 +588,13 @@ h3 {
 
 .lightbox-figure {
   margin: 0;
-  width: min(560px, 88vw);
+  width: min(900px, 92vw);
   text-align: center;
 }
 
 .lightbox-figure img {
   width: 100%;
-  max-height: 78vh;
+  max-height: 86vh;
   display: block;
   margin: 0 auto;
   object-fit: contain;
