@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Portfolio of John Lester M. Lepiten, an IT staff and design-focused technologist in Cebu." />
-    <meta name="theme-color" content="#f5efe4" />
+    <meta name="theme-color" content="#0b0a09" />
     <title>John Lester M. Lepiten | Portfolio</title>
 
     <meta property="og:type" content="website" />
@@ -19,7 +19,7 @@
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
 
     <script type="application/ld+json">
@@ -75,9 +75,25 @@
             <a class="button button-ghost" href="assets/John-Lester-Lepiten-Resume.pdf" download>Download Resume</a>
             <a class="button button-ghost" href="#contact">Contact Me</a>
           </div>
+
+          <div class="hero-stats">
+            <div>
+              <strong>Solo</strong>
+              <span>Full-stack: frontend, backend &amp; deploy</span>
+            </div>
+            <div>
+              <strong>4+</strong>
+              <span>Live sites &amp; platforms shipped</span>
+            </div>
+            <div>
+              <strong>React&nbsp;/&nbsp;Node</strong>
+              <span>Core stack, plus Supabase</span>
+            </div>
+          </div>
         </div>
 
         <div class="hero-visual reveal" aria-label="Portfolio portrait">
+          <div class="hero-shape" aria-hidden="true"></div>
           <div class="portrait-frame">
             <img src="assets/john-lester-lepiten.png" alt="Portrait of John Lester M. Lepiten" width="620" height="720" />
           </div>
@@ -119,7 +135,9 @@
               <img src="assets/projects/nx-step-site.png" alt="NX-STEP corporate website, About Us page" loading="lazy" width="1155" height="661" />
             </a>
             <div class="project-copy">
-              <span class="project-tag">Web Development</span>
+              <div class="project-tags">
+                <span class="project-tag">Web Development</span>
+              </div>
               <h3>NX-STEP</h3>
               <p>Corporate site for NX-STEP, a Japan-focused LMS administration and back-office support provider. Built solo in React &mdash; the core challenge was translating a B2B back-office service into an information architecture a client could follow in a single scroll.</p>
               <a class="project-link" href="https://nx-step.vercel.app" target="_blank" rel="noopener noreferrer">nx-step.vercel.app &#8599;</a>
@@ -131,7 +149,9 @@
               <img src="assets/samples/nx-step-portal-signin.png" alt="NX-STEP Eigo Academy sign-in screen, business English LMS platform" loading="lazy" width="1842" height="909" />
             </a>
             <div class="project-copy">
-              <span class="project-tag">Web Development</span>
+              <div class="project-tags">
+                <span class="project-tag">Web Development</span>
+              </div>
               <h3>NX-STEP Portal</h3>
               <p>Full-stack LMS for NX-STEP's Eigo Academy: sign-in, course paths, an instructor lesson builder, role-based dashboards, and a WebRTC video classroom with live spotlight layout and screen-share approval. My role covered the full stack &mdash; React/Vite, Node/Express, Supabase. Lesson-progression gating (unlocking content on quiz scores) was solved with a lightweight rules table instead of a full workflow engine, to keep it maintainable for a small team.</p>
               <a class="project-link" href="https://nx-step-portal.vercel.app" target="_blank" rel="noopener noreferrer">nx-step-portal.vercel.app &#8599;</a>
@@ -143,7 +163,10 @@
               <img src="assets/projects/graff-project.png" alt="Graff luxury jewelry boutique website, welcome carousel" loading="lazy" width="1837" height="890" />
             </a>
             <div class="project-copy">
-              <span class="project-tag">Web Development &middot; School Project</span>
+              <div class="project-tags">
+                <span class="project-tag">Web Development</span>
+                <span class="project-tag">School Project</span>
+              </div>
               <h3>Graff</h3>
               <p>Concept e-commerce site for a luxury jewelry boutique &mdash; categories, product detail, and account flows. Went back in solo post-launch to fix production issues that only showed up on real browsers: a frozen loading splash from a GSAP integrity-hash mismatch, a broken Google Maps embed, and a repeating intro animation.</p>
               <a class="project-link" href="https://graff-project.vercel.app/" target="_blank" rel="noopener noreferrer">graff-project.vercel.app &#8599;</a>
@@ -155,7 +178,10 @@
               <img src="assets/projects/steffys-flower-shop.png" alt="Steffy's flower shop website homepage" loading="lazy" width="1102" height="638" />
             </a>
             <div class="project-copy">
-              <span class="project-tag">Web Development &middot; Ongoing</span>
+              <div class="project-tags">
+                <span class="project-tag">Web Development</span>
+                <span class="project-tag">Ongoing</span>
+              </div>
               <h3>Steffy's Flower Shop</h3>
               <p>Handmade flower arrangement shop site, built incrementally as a live client project &mdash; structure and content first, styling and cart flow next.</p>
               <a class="project-link" href="https://steffys-flower-shop.vercel.app/" target="_blank" rel="noopener noreferrer">steffys-flower-shop.vercel.app &#8599;</a>
@@ -372,17 +398,17 @@
 
         <div class="work-grid">
           <article class="work-card tall reveal">
-            <span class="card-index">01</span>
+            <span class="card-mark" aria-hidden="true"></span>
             <h3>Web Development</h3>
             <p>Responsive pages, landing layouts, and interactive interfaces shaped around clarity and reliable structure.</p>
           </article>
           <article class="work-card reveal">
-            <span class="card-index">02</span>
+            <span class="card-mark" aria-hidden="true"></span>
             <h3>Graphic Design</h3>
             <p>Visual assets, poster-style layouts, brand pieces, and social creatives using Canva, Photoshop, Figma, and Illustrator.</p>
           </article>
           <article class="work-card reveal">
-            <span class="card-index">03</span>
+            <span class="card-mark" aria-hidden="true"></span>
             <h3>IT Support</h3>
             <p>Practical troubleshooting, documentation, systems support, and user help from internship and staff experience.</p>
           </article>
