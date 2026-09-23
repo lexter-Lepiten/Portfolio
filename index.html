@@ -53,9 +53,11 @@
     <header class="site-header">
       <a class="brand" href="#home" aria-label="John Lester M. Lepiten home">JML</a>
       <nav class="nav-links" aria-label="Primary navigation" id="primaryNav">
+        <a href="#home" data-nav="home">Home</a>
         <a href="#work" data-nav="work">Samples</a>
         <a href="#profile" data-nav="profile">Profile</a>
         <a href="#skills" data-nav="skills">Skills</a>
+        <a href="#certificates" data-nav="certificates">Certificates</a>
         <a href="#contact" data-nav="contact">Contact</a>
       </nav>
     </header>
@@ -129,6 +131,30 @@
           <h2>Projects I've built, and design pieces I've made.</h2>
         </div>
 
+        <article class="project-card project-featured reveal">
+          <a class="project-media" href="https://nx-step-portal.vercel.app" target="_blank" rel="noopener noreferrer">
+            <img src="assets/samples/nx-step-portal-signin.png" alt="NX-STEP Eigo Academy sign-in screen, business English LMS platform" loading="lazy" width="1842" height="909" />
+          </a>
+          <div class="project-copy">
+            <div class="project-tags">
+              <span class="project-tag">Web Development</span>
+              <span class="project-tag">Flagship Project</span>
+            </div>
+            <h3>NX-STEP Portal</h3>
+            <p>Full-stack LMS for NX-STEP's Eigo Academy: sign-in, course paths, an instructor lesson builder, role-based dashboards, and a WebRTC video classroom with screen-share approval. My role covered the full stack &mdash; React/Vite, Node/Express, Supabase. Lesson-progression gating (unlocking content on quiz scores) was solved with a lightweight rules table instead of a full workflow engine, to keep it maintainable for a small team.</p>
+            <ul class="project-challenges">
+              <li><strong>SDP offer glare</strong> &mdash; two peers issuing connection offers at the same moment stalled the call; fixed with UUID-based lexicographic tiebreaking so only one side ever offers.</li>
+              <li><strong>TURN credential flow</strong> &mdash; calls failed behind strict NATs because relay credentials weren't being fetched correctly; rebuilt as a two-step request-then-fetch flow.</li>
+              <li><strong>Black peer video</strong> &mdash; video elements stayed black even after connecting; traced to a stale ref and a missing explicit <code>.play()</code> call once the stream attached.</li>
+            </ul>
+            <div class="project-links">
+              <a class="project-link" href="https://nx-step-portal.vercel.app" target="_blank" rel="noopener noreferrer">nx-step-portal.vercel.app &#8599;</a>
+              <!-- TODO: replace # with your Loom/screen-recording link once recorded, then remove this comment -->
+              <a class="project-link project-link-ghost" href="#" target="_blank" rel="noopener noreferrer">Watch a walkthrough &#8599;</a>
+            </div>
+          </div>
+        </article>
+
         <div class="projects-grid">
           <article class="project-card reveal">
             <a class="project-media" href="https://nx-step.vercel.app" target="_blank" rel="noopener noreferrer">
@@ -141,20 +167,6 @@
               <h3>NX-STEP</h3>
               <p>Corporate site for NX-STEP, a Japan-focused LMS administration and back-office support provider. Built solo in React &mdash; the core challenge was translating a B2B back-office service into an information architecture a client could follow in a single scroll.</p>
               <a class="project-link" href="https://nx-step.vercel.app" target="_blank" rel="noopener noreferrer">nx-step.vercel.app &#8599;</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <a class="project-media" href="https://nx-step-portal.vercel.app" target="_blank" rel="noopener noreferrer">
-              <img src="assets/samples/nx-step-portal-signin.png" alt="NX-STEP Eigo Academy sign-in screen, business English LMS platform" loading="lazy" width="1842" height="909" />
-            </a>
-            <div class="project-copy">
-              <div class="project-tags">
-                <span class="project-tag">Web Development</span>
-              </div>
-              <h3>NX-STEP Portal</h3>
-              <p>Full-stack LMS for NX-STEP's Eigo Academy: sign-in, course paths, an instructor lesson builder, role-based dashboards, and a WebRTC video classroom with live spotlight layout and screen-share approval. My role covered the full stack &mdash; React/Vite, Node/Express, Supabase. Lesson-progression gating (unlocking content on quiz scores) was solved with a lightweight rules table instead of a full workflow engine, to keep it maintainable for a small team.</p>
-              <a class="project-link" href="https://nx-step-portal.vercel.app" target="_blank" rel="noopener noreferrer">nx-step-portal.vercel.app &#8599;</a>
             </div>
           </article>
 
@@ -508,6 +520,52 @@
           <span>Open-mindedness</span>
           <span>Creativity</span>
         </div>
+      </section>
+
+      <section id="certificates" class="section certificates-section">
+        <div class="section-head reveal">
+          <p class="eyebrow">Credentials</p>
+          <h2>Certifications and proof of work experience.</h2>
+        </div>
+
+        <div class="sample-gallery cert-gallery">
+          <figure class="cert-item reveal">
+            <button type="button" class="sample-trigger" data-group="certificates" data-full="assets/certificates/coe-lester.jpg" data-caption="Certificate of Employment &mdash; NX-STEP Corp. (IT Staff, Mar&ndash;Aug 2026)">
+              <img src="assets/certificates/coe-lester.jpg" alt="Certificate of Employment from NX-STEP Corp." loading="lazy" />
+              <figcaption><span>Employment</span>Certificate of Employment &mdash; NX-STEP Corp.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="cert-item reveal">
+            <button type="button" class="sample-trigger" data-group="certificates" data-full="assets/certificates/n8n-qs101.jpg" data-caption="n8n Academy &mdash; n8n Quickstart">
+              <img src="assets/certificates/n8n-qs101.jpg" alt="n8n Academy certificate: n8n Quickstart" loading="lazy" />
+              <figcaption><span>n8n Academy</span>n8n Quickstart</figcaption>
+            </button>
+          </figure>
+
+          <figure class="cert-item reveal">
+            <button type="button" class="sample-trigger" data-group="certificates" data-full="assets/certificates/n8n-101.jpg" data-caption="n8n Academy &mdash; Essentials: Your First Workflows">
+              <img src="assets/certificates/n8n-101.jpg" alt="n8n Academy certificate: Essentials, Your First Workflows" loading="lazy" />
+              <figcaption><span>n8n Academy</span>Essentials: Your First Workflows</figcaption>
+            </button>
+          </figure>
+
+          <figure class="cert-item reveal">
+            <button type="button" class="sample-trigger" data-group="certificates" data-full="assets/certificates/n8n-102.jpg" data-caption="n8n Academy &mdash; Integrations: APIs &amp; Connected Workflows">
+              <img src="assets/certificates/n8n-102.jpg" alt="n8n Academy certificate: Integrations, APIs and Connected Workflows" loading="lazy" />
+              <figcaption><span>n8n Academy</span>Integrations: APIs &amp; Connected Workflows</figcaption>
+            </button>
+          </figure>
+
+          <figure class="cert-item reveal">
+            <button type="button" class="sample-trigger" data-group="certificates" data-full="assets/certificates/n8n-103.jpg" data-caption="n8n Academy &mdash; In Practice: AI, Testing &amp; Best Practices">
+              <img src="assets/certificates/n8n-103.jpg" alt="n8n Academy certificate: In Practice, AI, Testing and Best Practices" loading="lazy" />
+              <figcaption><span>n8n Academy</span>In Practice: AI, Testing &amp; Best Practices</figcaption>
+            </button>
+          </figure>
+        </div>
+
+      
       </section>
 
       <section id="contact" class="section contact-section">

@@ -140,6 +140,7 @@ main {
 #work,
 #profile,
 #skills,
+#certificates,
 #contact {
   scroll-margin-top: var(--header-h);
 }
@@ -451,6 +452,37 @@ h3 {
   box-shadow: var(--shadow);
 }
 
+.project-featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  margin-bottom: 20px;
+  border-color: var(--line-strong);
+}
+
+.project-featured:hover {
+  transform: none;
+}
+
+.project-featured .project-media {
+  aspect-ratio: auto;
+  height: 100%;
+  min-height: 320px;
+}
+
+.project-featured .project-copy {
+  padding: clamp(24px, 3vw, 34px);
+}
+
+.project-featured .project-tag:last-child {
+  border-color: var(--accent);
+  color: var(--accent-2);
+  background: var(--accent-soft);
+}
+
+.project-featured h3 {
+  font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+}
+
 .project-media {
   display: block;
   aspect-ratio: 16 / 9.3;
@@ -503,6 +535,51 @@ h3 {
   color: var(--muted);
   font-size: 0.95rem;
   margin-bottom: 14px;
+}
+
+.project-challenges {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  border-left: 2px solid var(--accent);
+  background: var(--bg-soft);
+  list-style: none;
+}
+
+.project-challenges li {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.project-challenges strong {
+  color: var(--paper);
+  font-weight: 700;
+}
+
+.project-challenges code {
+  padding: 1px 5px;
+  background: var(--surface-2);
+  color: var(--accent-2);
+  font-size: 0.85em;
+  border-radius: 3px;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.project-link-ghost {
+  color: var(--muted);
+  border-bottom-color: var(--line-strong);
+}
+
+.project-link-ghost:hover {
+  color: var(--accent-2);
+  border-color: var(--accent-2);
 }
 
 .project-link {
@@ -578,6 +655,9 @@ h3 {
   border: 1px solid var(--line);
   background: var(--surface);
   cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -633,6 +713,28 @@ h3 {
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.04em;
+}
+
+/* ---------- Certificates ---------- */
+
+.cert-item {
+  margin: 0;
+}
+
+.cert-item .sample-trigger {
+  aspect-ratio: 4 / 3;
+  background: #fff;
+}
+
+.cert-item .sample-trigger img {
+  object-fit: contain;
+  filter: none;
+  padding: 6px;
+}
+
+.cert-item .sample-trigger:hover img,
+.cert-item .sample-trigger:focus-visible img {
+  transform: scale(1.02);
 }
 
 /* ---------- Lightbox ---------- */
@@ -943,6 +1045,15 @@ h3 {
 
   .sample-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-featured {
+    grid-template-columns: 1fr;
+  }
+
+  .project-featured .project-media {
+    aspect-ratio: 16 / 9.3;
+    min-height: 0;
   }
 
   .work-grid,

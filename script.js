@@ -17,7 +17,7 @@ filterButtons.forEach(btn => {
 // Scroll progress bar + active nav highlighting (rAF-throttled)
 const scrollProgress = document.getElementById('scrollProgress');
 const navLinks = document.querySelectorAll('#primaryNav a[data-nav]');
-const navSections = ['work', 'profile', 'skills', 'contact']
+const navSections = ['home', 'work', 'profile', 'skills', 'certificates', 'contact']
   .map(id => document.getElementById(id))
   .filter(Boolean);
 
@@ -77,9 +77,14 @@ let lastFocused = null;
 // Ordered list of triggers currently visible, for prev/next + preload
 const allTriggers = Array.from(document.querySelectorAll('.sample-trigger'));
 let currentIndex = -1;
+let currentGroup = 'samples';
 
-function getVisibleTriggers() {
-  return allTriggers.filter(t => !t.closest('.sample-item').classList.contains('is-hidden'));
+function getVisibleTriggers(group) {
+  return allTriggers.filter(t => {
+    if ((t.dataset.group || 'samples') !== group) return false;
+    const wrapper = t.closest('.sample-item, .cert-item');
+    return !wrapper || !wrapper.classList.contains('is-hidden');
+  });
 }
 
 function preloadImage(src) {
@@ -107,7 +112,8 @@ function showAtIndex(list, index) {
 
 function openLightbox(trigger) {
   lastFocused = trigger;
-  const list = getVisibleTriggers();
+  currentGroup = trigger.dataset.group || 'samples';
+  const list = getVisibleTriggers(currentGroup);
   const index = list.indexOf(trigger);
   showAtIndex(list, index === -1 ? 0 : index);
 
@@ -126,14 +132,14 @@ function closeLightbox() {
 }
 
 function showNext() {
-  const list = getVisibleTriggers();
+  const list = getVisibleTriggers(currentGroup);
   if (!list.length) return;
   const next = (currentIndex + 1) % list.length;
   showAtIndex(list, next);
 }
 
 function showPrev() {
-  const list = getVisibleTriggers();
+  const list = getVisibleTriggers(currentGroup);
   if (!list.length) return;
   const prev = (currentIndex - 1 + list.length) % list.length;
   showAtIndex(list, prev);
